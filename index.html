@@ -230,14 +230,20 @@
         <span id="copyText">Copy Number</span>
       </button>
 
-      <button type="button" class="btn btn-secondary" onclick="openGCash()">
+      <!-- Direct native Android Intent link (automatically switches to gcash:// on iOS) -->
+      <a
+        id="openGcashBtn"
+        href="intent://scan/#Intent;package=com.globe.gcash.android;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end;"
+        class="btn btn-secondary"
+        onclick="handleOpenClick()"
+      >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           <polyline points="15 3 21 3 21 9"></polyline>
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
         <span>Open GCash App</span>
-      </button>
+      </a>
 
       <div class="status-note" id="fallbackNote">
         Number copied (<strong>09266393052</strong>). If GCash didn't open automatically, switch to your GCash app manually or open this page in Chrome/Safari.
@@ -263,13 +269,14 @@
   <script>
     const CLEAN_NUMBER = "09266393052";
 
-    function writeClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        return navigator.clipboard.writeText(text).catch(() => legacyCopy(text));
+    // Set the proper native link on page load so tapping is a pure browser navigation
+    window.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("openGcashBtn");
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+      if (isIOS) {
+        btn.href = "gcash://";
       }
-      legacyCopy(text);
-      return Promise.resolve();
-    }
+    });
 
     function legacyCopy(text) {
       const textarea = document.createElement("textarea");
@@ -283,38 +290,31 @@
       document.body.removeChild(textarea);
     }
 
+    function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => legacyCopy(text));
+      } else {
+        legacyCopy(text);
+      }
+    }
+
     function copyNumber() {
       writeClipboard(CLEAN_NUMBER);
       const btn = document.getElementById("copyBtn");
       const text = document.getElementById("copyText");
       btn.classList.add("copied");
       text.textContent = "Copied! (09266393052)";
-
       setTimeout(() => {
         btn.classList.remove("copied");
         text.textContent = "Copy Number";
       }, 2500);
     }
 
-    function openGCash() {
-      // 1. Copy number first without DOM focus disruption
-      writeClipboard(CLEAN_NUMBER);
-
-      const ua = navigator.userAgent || "";
-      const isAndroid = /Android/i.test(ua);
-      const isIOS = /iPhone|iPad|iPod/i.test(ua);
-
-      // 2. Use platform-specific deep link so Chrome/Safari reliably launches GCash
-      if (isAndroid) {
-        window.location.href =
-          "intent://#Intent;scheme=gcash;package=com.globe.gcash.android;end;";
-      } else if (isIOS) {
-        window.location.href = "gcash://";
-      } else {
-        window.location.href = "gcash://";
+    function handleOpenClick() {
+      // Copy cleanly without touching DOM or calling preventDefault() so the <a> tag fires natively
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(CLEAN_NUMBER).catch(() => {});
       }
-
-      // 3. Show helpful guidance if browser blocked the redirect (e.g., Messenger webview or desktop)
       setTimeout(() => {
         if (!document.hidden) {
           document.getElementById("fallbackNote").style.display = "block";
