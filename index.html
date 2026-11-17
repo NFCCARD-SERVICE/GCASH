@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send via GCash — 0926 639 3052</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gcash-blue: #1972F9;
+      --gcash-dark: #0A2757;
+      --gcash-mid: #025AE9;
+      --gcash-light: #EEF5FF;
+      --surface: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --success: #10B981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--gcash-blue) 0%, var(--gcash-mid) 55%, var(--gcash-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--text-main);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 390px;
+      background: var(--surface);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(10, 39, 87, 0.35);
+      animation: slideUp 0.4s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--gcash-blue), var(--gcash-mid));
+      padding: 28px 24px 36px;
+      text-align: center;
+      color: #FFFFFF;
+      position: relative;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .g-circle {
+      width: 26px;
+      height: 26px;
+      background: #FFFFFF;
+      color: var(--gcash-blue);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .header p {
+      font-size: 0.875rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .body-content {
+      padding: 0 24px 28px;
+      margin-top: -18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .number-box {
+      background: var(--gcash-light);
+      border: 1.5px solid #CFE2FF;
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .number-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--gcash-mid);
+      margin-bottom: 6px;
+    }
+
+    .phone-number {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--gcash-dark);
+      letter-spacing: 0.03em;
+      user-select: all;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 15px 20px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--gcash-blue);
+      color: #FFFFFF;
+      box-shadow: 0 8px 20px rgba(25, 114, 249, 0.3);
+      margin-bottom: 12px;
+    }
+
+    .btn-primary:hover {
+      background: var(--gcash-mid);
+    }
+
+    .btn-primary.copied {
+      background: var(--success);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--gcash-blue);
+      border: 2px solid var(--gcash-blue);
+    }
+
+    .btn-secondary:hover {
+      background: var(--gcash-light);
+    }
+
+    .steps {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #E2E8F0;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .step-item {
+      flex: 1;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gcash-light);
+      color: var(--gcash-blue);
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <div class="header">
+      <div class="brand-badge">
+        <span class="g-circle">G</span>
+        <span>GCash</span>
+      </div>
+      <p>Express Send Payment Details</p>
+    </div>
+
+    <div class="body-content">
+      <div class="number-box">
+        <div class="number-label">GCash Mobile Number</div>
+        <div class="phone-number" id="displayNumber">0926 639 3052</div>
+      </div>
+
+      <!-- Copies clean 11-digit number without spaces -->
+      <button class="btn btn-primary" id="copyBtn" onclick="copyNumber()">
+        <svg id="copyIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span id="copyText">Copy Number</span>
+      </button>
+
+      <!-- Deep link to launch GCash app directly -->
+      <a href="gcash://" class="btn btn-secondary" onclick="copySilent()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        <span>Open GCash App</span>
+      </a>
+
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>Tap Copy<br>Number</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>Open GCash<br>&amp; Express Send</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>Paste &amp;<br>Send</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const CLEAN_NUMBER = "09266393052";
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+
+    async function copyNumber() {
+      try {
+        await navigator.clipboard.writeText(CLEAN_NUMBER);
+      } catch (err) {
+        fallbackCopy(CLEAN_NUMBER);
+      }
+
+      const btn = document.getElementById("copyBtn");
+      const text = document.getElementById("copyText");
+      btn.classList.add("copied");
+      text.textContent = "Copied! (09266393052)";
+
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        text.textContent = "Copy Number";
+      }, 2500);
+    }
+
+    // Automatically copies the number even if the user taps "Open GCash App" first
+    function copySilent() {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(CLEAN_NUMBER).catch(() => fallbackCopy(CLEAN_NUMBER));
+      } else {
+        fallbackCopy(CLEAN_NUMBER);
+      }
+    }
+  </script>
+</body>
+</html>
